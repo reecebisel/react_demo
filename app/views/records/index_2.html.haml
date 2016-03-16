@@ -1,0 +1,45 @@
+.col-xs-12
+  .records  
+    %h2 Records
+    .row
+      .col-md-4
+        .panel.panel-success
+          .panel-heading Credit
+          .panel-body
+            =@records.sum_credits
+      .col-md-4
+        .panel.panel-danger
+          .panel-heading Debit
+          .penal-body
+            =@records.sum_debits
+      .col-md-4
+        .panel.panel-info
+          .panel-heading Balance
+          .panel-body 
+            =@records.balance
+    .row
+      .col-xs-12
+        - form_for @record do |f|
+          =f.text_field :date, placeholder: 'yyyy/mm/dd'
+          =f.text_field :title, placeholder: 'Title'
+          =f.number_field :amount, placeholder: 'Amount'
+          =f.submit 'Create Record', class: 'btn btn-info'
+        .hr
+    .row
+      .col-xs-12
+        %table.table-bordered.table-hover
+          %thead
+            %tr
+              %th Date
+              %th Title
+              %th Amount
+              %th Actions
+          %tbody
+            - @records.each do |r|
+              %tr
+                %td r.date
+                %td r.title
+                %td r.amount
+                %td 
+                  .btn.btn-default Edit
+                  .btn.btn-danger Delete
